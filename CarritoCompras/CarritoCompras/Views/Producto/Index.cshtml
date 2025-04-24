@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CarritoCompras.Models.Producto>
+
+<h2 class="text-center">Productos disponibles</h2>
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+
+            <div class="card h-100">
+
+                <!-- Mostrar la URL de la imagen para depuración -->
+                <p>@item.Imagen</p> 
+
+                <img src="@item.Imagen" class="card-img-top" alt="@item.Nombre" style="height: 200px; object-fit: cover;" />
+
+                <div class="card-body">
+                    <h5 class="card-title">@item.Nombre</h5>
+                    <p class="card-text">@item.Descripcion</p>
+                    <p class="card-text"><strong>Precio: </strong>@item.Precio</p>
+                    <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>
+
