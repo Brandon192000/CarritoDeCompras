@@ -13,6 +13,46 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Usuario\\Desktop\\Carrito De Compras\\CarritoCompras\\CarritoCompras\\wwwroot\\img\\Gopro.jpg",
+      "PackagePath": "staticwebassets\\img\\Gopro.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\Desktop\\Carrito De Compras\\CarritoCompras\\CarritoCompras\\wwwroot\\img\\MouseRazer.jpg",
+      "PackagePath": "staticwebassets\\img\\MouseRazer.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\Desktop\\Carrito De Compras\\CarritoCompras\\CarritoCompras\\wwwroot\\img\\Play5.jpg",
+      "PackagePath": "staticwebassets\\img\\Play5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\Desktop\\Carrito De Compras\\CarritoCompras\\CarritoCompras\\wwwroot\\img\\Redmi_2012.jpg",
+      "PackagePath": "staticwebassets\\img\\Redmi_2012.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\Desktop\\Carrito De Compras\\CarritoCompras\\CarritoCompras\\wwwroot\\img\\amazon-alexa.jpg",
+      "PackagePath": "staticwebassets\\img\\amazon-alexa.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\Desktop\\Carrito De Compras\\CarritoCompras\\CarritoCompras\\wwwroot\\img\\amazon_alexa.jpg",
+      "PackagePath": "staticwebassets\\img\\amazon_alexa.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\Desktop\\Carrito De Compras\\CarritoCompras\\CarritoCompras\\wwwroot\\img\\llave_pistola.jpg",
+      "PackagePath": "staticwebassets\\img\\llave_pistola.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\Desktop\\Carrito De Compras\\CarritoCompras\\CarritoCompras\\wwwroot\\img\\robot.jpg",
+      "PackagePath": "staticwebassets\\img\\robot.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\Desktop\\Carrito De Compras\\CarritoCompras\\CarritoCompras\\wwwroot\\img\\xbox one.jpeg",
+      "PackagePath": "staticwebassets\\img\\xbox one.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Usuario\\Desktop\\Carrito De Compras\\CarritoCompras\\CarritoCompras\\wwwroot\\js\\searchFocus.js",
+      "PackagePath": "staticwebassets\\js\\searchFocus.js"
+    },
+    {
       "Id": "C:\\Users\\Usuario\\Desktop\\Carrito De Compras\\CarritoCompras\\CarritoCompras\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

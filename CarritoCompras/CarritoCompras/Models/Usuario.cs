@@ -28,6 +28,7 @@ namespace CarritoCompras.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? FechaRegistro { get; set; }
 
+        public bool Borrado { get; set; }
 
         /// <summary>
         /// atributos de nav

@@ -1,31 +1,65 @@
-﻿@model IEnumerable<CarritoCompras.Models.Producto>
+﻿@model List<CarritoCompras.Models.Producto>
 
-<h2 class="text-center">Productos disponibles</h2>
+@{
+    ViewData["Title"] = "Productos";
+}
 
-<div class="row">
+<div class="productos-background py-5">
+    <div class="container">
+        <h2 class="text-center text-primary mb-4">Productos disponibles</h2>
 
-    @foreach (var item in Model)
-    {
-        <div class="col-md-4 mb-4">
-
-            <div class="card h-100">
-
-                <!-- Mostrar la URL de la imagen para depuración -->
-                <p>@item.Imagen</p> 
-
-                <img src="@item.Imagen" class="card-img-top" alt="@item.Nombre" style="height: 200px; object-fit: cover;" />
-
-                <div class="card-body">
-                    <h5 class="card-title">@item.Nombre</h5>
-                    <p class="card-text">@item.Descripcion</p>
-                    <p class="card-text"><strong>Precio: </strong>@item.Precio</p>
-                    <a href="#" class="btn btn-primary">Agregar al carrito</a>
-                </div>
-
+        <!-- ✅ MENSAJE DE ÉXITO -->
+        @if (TempData["Mensaje"] != null)
+        {
+            <div class="alert alert-success text-center" role="alert">
+                @TempData["Mensaje"]
             </div>
+        }
 
+        <!-- 🔍 Búsqueda -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-6 col-lg-5">
+                <form method="get" asp-action="Index">
+                    <div class="input-group">
+                        <input type="text"
+                               name="filtro"
+                               class="form-control"
+                               placeholder="Buscar productos..."
+                               value="@Context.Request.Query["filtro"]"
+                               oninput="this.form.submit()" />
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-    }
 
+        <!-- 🛒 Tarjetas de productos -->
+        <div class="productos-wrapper">
+            <div class="productos-grid">
+                @foreach (var item in Model)
+                {
+                    <div class="card-ml">
+                        <img src="@item.Imagen" class="card-img-top" alt="@item.Nombre" />
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Nombre</h5>
+                            <p class="card-text">@item.Descripcion</p>
+                            <p class="card-price">Precio: @item.Precio</p>
+
+                            <form asp-action="AgregarAlCarrito" method="post">
+                                <input type="hidden" name="idProducto" value="@item.Id" />
+                                <button type="submit" class="btn btn-comprar w-100">
+                                    <i class="fas fa-cart-plus"></i> Agregar al carrito
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
 
+
+<script src="~/js/searchFocus.js"></script>

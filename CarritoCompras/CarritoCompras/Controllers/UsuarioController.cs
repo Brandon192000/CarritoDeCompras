@@ -4,7 +4,8 @@ using CarritoCompras.Services.UsuarioService;
 using CarritoCompras.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace CarritoCompras.Controllers
 {
@@ -29,36 +30,44 @@ namespace CarritoCompras.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel login) 
+        public async Task<IActionResult> Login(LoginViewModel login)
         {
-
             if (!ModelState.IsValid)
             {
                 return View(login);
             }
 
-            if (string.IsNullOrEmpty(login.Correo) && string.IsNullOrWhiteSpace(login.Contrasenia))
+            if (string.IsNullOrEmpty(login.Correo) || string.IsNullOrWhiteSpace(login.Contrasenia))
             {
-                ModelState.AddModelError("", "El correo electronico o contraseña no es valido. Debe verificar que no haya espacios ni este vacio");
+                ModelState.AddModelError("", "El correo electrónico o contraseña no son válidos.");
                 return View(login);
             }
 
-            var usuarioRegistrado = await _usuarioService.
-                                          ValidarUsuarioAsync(login.Correo, login.Contrasenia);
+            var usuarioRegistrado = await _usuarioService.ValidarUsuarioAsync(login.Correo, login.Contrasenia);
 
-            if(usuarioRegistrado == null)
+            if (usuarioRegistrado == null)
             {
-                ModelState.AddModelError("", "El usuario no se encuentra registradoo");
+                ModelState.AddModelError("", "El usuario no se encuentra registrado.");
                 return View(login);
             }
 
+            // Guardar ID y Nombre del usuario en sesión
+            HttpContext.Session.SetString("UsuarioId", usuarioRegistrado.Id.ToString());
+            HttpContext.Session.SetString("UsuarioNombre", usuarioRegistrado.Nombre);
 
-            HttpContext.Session.SetString("UsuarioId", usuarioRegistrado.Id.ToString()); // Guardar usuario en sesión, cookie, claims, etc.
-
-
-            return RedirectToAction("Index", "Home");
-
+            // Redirigir al index de productos
+            return RedirectToAction("Index", "Producto");
         }
 
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            // Limpiar toda la sesión
+            HttpContext.Session.Clear();
+            // Redirigir al login
+            return RedirectToAction("Login", "Usuario");
+        }
     }
+
 }
+

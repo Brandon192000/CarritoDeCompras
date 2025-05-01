@@ -1,4 +1,5 @@
 using CarritoCompras.Data;
+using CarritoCompras.Services.CarritoService;
 using CarritoCompras.Services.ProductoService;
 using CarritoCompras.Services.UsuarioService;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,8 @@ builder.Services.AddDbContext<DBAppContext>(options => options.UseSqlServer(buil
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
+builder.Services.AddScoped<ICarritoService, CarritoService>();
+
 
 builder.Services.AddSession();
 var app = builder.Build();
@@ -33,9 +36,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseSession();
+
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthorization();
 

@@ -33,6 +33,8 @@ namespace CarritoCompras.Models
         [MaxLength(500, ErrorMessage = "El campo {0} tiene un maximo de 50 caracteres")]
         public string Imagen {  get; set; }
 
+        public bool Borrado { get; set; }
+
 
         /// <summary>
         /// atributos denav
