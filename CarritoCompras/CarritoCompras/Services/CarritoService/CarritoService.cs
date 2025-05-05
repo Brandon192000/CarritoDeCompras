@@ -2,6 +2,7 @@
 using CarritoCompras.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.CodeDom;
 
 namespace CarritoCompras.Services.CarritoService
 {
@@ -84,13 +85,121 @@ namespace CarritoCompras.Services.CarritoService
         }
 
 
-        public async Task<Carrito?> ObtenerCarritoPorUsuario(int idUsuario)
+        public async Task<Carrito> ObtenerCarritoPorUsuario(int usuarioId)
         {
-            return await _context.Carritos
-                .Include(c => c.DetallesCarrito)
-                .FirstOrDefaultAsync(c => c.IdUsuario == idUsuario && c.Estado == "Activo");
+            try
+            {
+
+                var carrito = await _context!.Carritos!
+                              .Include(c => c.DetallesCarrito!)
+                              .ThenInclude(d => d.Producto!)
+                              .FirstOrDefaultAsync(c => c.IdUsuario == usuarioId)
+                               ?? new Carrito();
+
+                return carrito;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+            
 
+        public async Task<CarritoDetalle> EliminarProductoCarrito(Producto producto, int idUsuario)
+        {
 
+            try
+            {
+
+                var carrito = await _context.Carritos.FirstOrDefaultAsync(p => p.IdUsuario == idUsuario);
+
+                if (carrito == null)
+                {
+
+                    return null;
+
+                }
+
+                var productoEliminar = await _context.CarritoDetalles
+                                      .FirstOrDefaultAsync(p => p.IdProducto == producto.Id);
+
+                if (productoEliminar == null)
+                {
+                    return null;
+                }
+
+                _context.CarritoDetalles.Remove(productoEliminar);
+                await _context.SaveChangesAsync();
+
+                return productoEliminar;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public async Task<CarritoDetalle> RestarCantidadProducto(Producto producto, int idUsuario)
+        {
+
+            try
+            {
+
+                if (producto == null)
+                {
+
+                    return null;
+
+                }
+
+                var carrito = await _context.Carritos.FirstOrDefaultAsync(p => p.IdUsuario == idUsuario);
+
+                if (carrito == null)
+                {
+
+                    return null;
+
+                }
+
+                var productoRestar = await _context.CarritoDetalles
+                                      .FirstOrDefaultAsync(p => p.IdProducto == producto.Id);
+
+                if (productoRestar == null)
+                {
+
+                    return null;
+
+                }
+
+                if (productoRestar.Cantidad >= 1)
+                {
+
+                    productoRestar.Cantidad -= 1;
+                    _context.CarritoDetalles.Update(productoRestar);
+
+                }
+                else
+                {
+
+                    _context.Remove(productoRestar);
+
+                }
+
+                await _context.SaveChangesAsync();
+                return productoRestar;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+
+            }
+            
+        }
     }
 }

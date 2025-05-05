@@ -15,14 +15,14 @@
                         <!-- Mostrar los errores de validación -->
                         @if (!ViewData.ModelState.IsValid)
                         {
-                            <div class="alert alert-danger">
-                                <ul class="mb-0">
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
                                     @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
                                     {
-                                        <li>@error.ErrorMessage</li>
+                                                <li>@error.ErrorMessage</li>
                                     }
-                                </ul>
-                            </div>
+                                    </ul>
+                                </div>
                         }
 
                         <form asp-action="Login" method="post" class="animate__animated animate__fadeIn animate__delay-1s">
@@ -31,7 +31,9 @@
                                 <label asp-for="Correo" class="form-label fs-5">Correo Electrónico</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-success text-white"><i class="fas fa-envelope"></i></span>
-                                    <input asp-for="Correo" class="form-control fs-5 py-3" placeholder="Introduce tu correo" />
+                                    <input class="form-control fs-5 py-3" placeholder="Introduce tu correo" type="email" autocomplete="username" 
+                                           data-val="true" data-val-email="El correo no es válido, ingrese uno válido de nuevo." 
+                                           data-val-required="El correo es obligatorio" id="Correo" name="Correo" value="@Model.Correo" />
                                 </div>
                                 <span asp-validation-for="Correo" class="text-danger"></span>
                             </div>
@@ -40,10 +42,10 @@
                             <div class="form-group mb-4 position-relative">
                                 <label for="Contrasenia" class="form-label fs-5">Contraseña</label>
                                 <div class="input-group">
-                                    <input type="password" id="password" name="Contrasenia"
-                                           class="form-control fs-5 py-3"
-                                           placeholder="Introduce tu contraseña" />
+                                    <input type="password" id="password" name="Contrasenia" class="form-control fs-5 py-3" 
+                                           placeholder="Introduce tu contraseña" autocomplete="current-password" />
                                 </div>
+                                <span asp-validation-for="Contrasenia" class="text-danger"></span>
                             </div>
 
                             <!-- Botón de Iniciar Sesión -->

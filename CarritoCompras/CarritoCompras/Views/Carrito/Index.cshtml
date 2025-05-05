@@ -4,47 +4,73 @@
     ViewData["Title"] = "Mi Carrito";
 }
 
-<h2>Mi Carrito</h2>
+<div class="carrito-background">
+    <div class="carrito-card">
 
-@if (TempData["Mensaje"] != null)
-{
-    <div class="alert alert-info">
-        @TempData["Mensaje"]
-    </div>
-}
+        <h2 class="mb-4 text-center text-primary">🛒 Mi Carrito</h2>
 
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger">
-        @TempData["Error"]
-    </div>
-}
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Precio Unitario</th>
-            <th>Total</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+        @if (TempData["Mensaje"] != null)
         {
-            <tr>
-                <td>@item.Producto.Nombre</td>
-                <td>@item.Cantidad</td>
-                <td>@item.PrecioProducto</td>
-                <td>@(item.Cantidad * item.PrecioProducto)</td>
-                <td>
-                    <form method="post" action="@Url.Action("AgregarAlCarrito", "Carrito")">
-                        <input type="hidden" name="idProducto" value="@item.IdProducto" />
-                        <button type="submit" class="btn btn-primary">Agregar más</button>
-                    </form>
-                </td>
-            </tr>
+            <div class="alert alert-info text-center">
+                @TempData["Mensaje"]
+            </div>
         }
-    </tbody>
-</table>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger text-center mb-4">
+                @TempData["Error"]
+            </div>
+        }
+
+        <table class="table table-bordered table-hover align-middle text-center w-100">
+            <thead class="table-primary">
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var subtotal = item.Cantidad * item.PrecioProducto;
+                    <tr>
+                        <td class="text-start">@item.Producto.Nombre</td>
+                        <td>@item.Cantidad</td>
+                        <td>@item.PrecioProducto.ToString("C")</td>
+                        <td>@subtotal.ToString("C")</td>
+                        <td>
+                            <div class="d-flex justify-content-center gap-1">
+                                <form method="post" asp-action="AgregarAlCarrito" asp-controller="Carrito">
+                                    <input type="hidden" name="idProducto" value="@item.Producto.Id" />
+                                    <button type="submit" class="btn btn-outline-success btn-sm">➕</button>
+                                </form>
+
+                                <form method="post" asp-action="RestarCantidadProducto" asp-controller="Carrito">
+                                    <input type="hidden" name="idProducto" value="@item.Producto.Id" />
+                                    <button type="submit" class="btn btn-outline-warning btn-sm">➖</button>
+                                </form>
+
+                                <form method="post" asp-action="EliminarDelCarrito" asp-controller="Carrito">
+                                    <input type="hidden" name="idProducto" value="@item.Producto.Id" />
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">🗑️</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr class="table-light fw-bold">
+                    <td colspan="3" class="text-end">Total general:</td>
+                    <td colspan="2" class="text-success text-start">
+                        @Model.Sum(x => x.Cantidad * x.PrecioProducto).ToString("C")
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

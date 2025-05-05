@@ -32,7 +32,7 @@ footer {
     font-family: 'Raleway', sans-serif;
     padding: 2rem;
     margin-top: -18px;
-    margin-bottom: -18px
+    margin-bottom: -18px;
 }
 
     .hero-section h1 {
@@ -60,13 +60,12 @@ footer {
     }
 
 /* Productos */
-/* Productos */
 .productos-background {
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     padding: 3rem 0;
     min-height: 100vh; /* Cambiado a min-height para permitir que el fondo crezca */
     margin-top: -18px;
-    margin-bottom: -18px
+    margin-bottom: -18px;
 }
 
 .productos-wrapper {
@@ -92,16 +91,16 @@ footer {
     flex-direction: column;
 }
 
-.card-ml:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
+    .card-ml:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-.card-ml img {
-    width: 100%;
-    height: 160px;
-    object-fit: contain;
-    background-color: #f7f7f7;
-}
+    .card-ml img {
+        width: 100%;
+        height: 160px;
+        object-fit: contain;
+        background-color: #f7f7f7;
+    }
 
 .card-body {
     padding: 1rem;
@@ -138,21 +137,59 @@ footer {
     text-decoration: none;
 }
 
-.btn-comprar:hover {
-    background-color: #0b5ed7;
-}
+    .btn-comprar:hover {
+        background-color: #0b5ed7;
+    }
 
-
-
-/*login*/
+/* login */
 /* Fondo de la página de login */
 .login-page {
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     height: 90vh; /* Hace que el fondo ocupe toda la altura de la ventana */
     margin-top: -17px;
 }
-.card{
 
-    margin-top: 25vh
+.card {
+    margin-top: 25vh;
+}
 
+/* Estilo específico para la vista del carrito */
+/* Contenedor principal */
+.carrito-background {
+    display: flex; /* Usamos flexbox para alinear el contenido */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Toma el 100% de la altura de la pantalla */
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Fondo con gradiente */
+    margin-top: -19px;
+    margin-bottom: -10px;
+}
+
+/* El contenido de la tarjeta */
+.carrito-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Añadimos sombra para dar profundidad */
+    max-width: 900px; /* Ancho máximo para evitar que se expanda demasiado */
+    width: 100%; /* Asegura que ocupe el 100% del ancho permitido */
+    box-sizing: border-box;
+}
+
+/* Asegura que el texto dentro de la tarjeta esté alineado */
+h2.text-center {
+    margin-bottom: 1.5rem;
+}
+
+.table {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa; /* Color de fondo al pasar el mouse */
 }

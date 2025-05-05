@@ -7,11 +7,13 @@ using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configurar la configuracipón regional
-var defaultCulture = new CultureInfo("es-ES");
-defaultCulture.NumberFormat.NumberGroupSeparator = "";
+var defaultCulture = new CultureInfo("es-CR");
+defaultCulture.NumberFormat.CurrencySymbol = "$"; 
+defaultCulture.NumberFormat.NumberGroupSeparator = ""; 
+
 CultureInfo.DefaultThreadCurrentCulture = defaultCulture;
 CultureInfo.DefaultThreadCurrentUICulture = defaultCulture;
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

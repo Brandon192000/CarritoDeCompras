@@ -30,15 +30,15 @@ namespace CarritoCompras.Controllers
         [HttpPost]
         public async Task<IActionResult> AgregarAlCarrito(int idProducto)
         {
-            var usuarioId = HttpContext.Session.GetString("UsuarioId");
+            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
 
-            if (string.IsNullOrEmpty(usuarioId))
+            if (usuarioId == null)
             {
                 TempData["Error"] = "Debe iniciar sesión para agregar productos al carrito.";
-                return RedirectToAction("Login", "Usuario");  // Redirige al login si no está logueado
+                return RedirectToAction("Login", "Usuario");
             }
 
-            var producto = await _carritoService.AgregarProductoAlCarrito(idProducto, int.Parse(usuarioId));
+            var producto = await _carritoService.AgregarProductoAlCarrito(idProducto, usuarioId.Value);
 
             TempData["Mensaje"] = producto != null
                 ? "Producto agregado al carrito correctamente."

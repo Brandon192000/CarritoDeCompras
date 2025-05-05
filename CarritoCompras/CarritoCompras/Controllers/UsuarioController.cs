@@ -25,7 +25,7 @@ namespace CarritoCompras.Controllers
         public IActionResult Login()
         {
 
-            return View();
+            return View(new LoginViewModel());
 
         }
 
@@ -52,8 +52,12 @@ namespace CarritoCompras.Controllers
             }
 
             // Guardar ID y Nombre del usuario en sesión
-            HttpContext.Session.SetString("UsuarioId", usuarioRegistrado.Id.ToString());
+            HttpContext.Session.SetInt32("UsuarioId", usuarioRegistrado.Id);
             HttpContext.Session.SetString("UsuarioNombre", usuarioRegistrado.Nombre);
+
+            // Verificar si los valores se guardaron correctamente
+            Console.WriteLine("UsuarioId en sesión: " + HttpContext.Session.GetString("UsuarioId"));
+            Console.WriteLine("UsuarioNombre en sesión: " + HttpContext.Session.GetString("UsuarioNombre"));
 
             // Redirigir al index de productos
             return RedirectToAction("Index", "Producto");
